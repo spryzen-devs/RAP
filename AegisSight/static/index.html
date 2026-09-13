@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AegisSight AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <h1>AegisSight AI</h1>
+            </div>
+            <div class="status-badge" id="apiStatus">Connecting...</div>
+        </header>
+
+        <main>
+            <div class="panel left-panel">
+                <div class="upload-zone" id="uploadZone">
+                    <input type="file" id="fileInput" accept="image/*" hidden>
+                    <div class="upload-content" id="uploadContent">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <p>Drag & drop an image here</p>
+                        <button class="btn btn-secondary" onclick="document.getElementById('fileInput').click()">Browse
+                            Files</button>
+                    </div>
+                    <div class="preview-container hidden" id="previewContainer">
+                        <canvas id="imageCanvas"></canvas>
+                        <button class="btn-icon clear-btn" id="clearBtn" title="Clear Image">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel right-panel">
+                <div class="tabs">
+                    <button class="tab-btn active" data-target="detect-tab">Detection</button>
+                    <button class="tab-btn" data-target="ask-tab">Reasoning</button>
+                </div>
+
+                <div class="tab-content active" id="detect-tab">
+                    <div class="control-group">
+                        <label for="confThreshold">Confidence Threshold: <span id="confValue">0.35</span></label>
+                        <input type="range" id="confThreshold" min="0.1" max="0.9" step="0.05" value="0.35">
+                    </div>
+                    <button class="btn btn-primary full-width" id="detectBtn" disabled>Run Detection</button>
+
+                    <div class="results-area" id="detectResults">
+                        <div class="empty-state">Upload an image and run detection to see results here.</div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="ask-tab">
+                    <div class="control-group">
+                        <label for="questionInput">Ask a question about the image:</label>
+                        <textarea id="questionInput" placeholder="e.g. How many people are not wearing safety vests?"
+                            rows="3"></textarea>
+                    </div>
+                    <button class="btn btn-primary full-width" id="askBtn" disabled>Ask AI</button>
+
+                    <div class="results-area" id="askResults">
+                        <div class="empty-state">Upload an image and ask a question to see the AI reasoning here.</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loader-overlay hidden" id="loader">
+        <div class="spinner"></div>
+        <p id="loaderText">Processing...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+services:
+  ppe-api:
+    build: .
+    ports:
+      - "8001:8000"
+    env_file:
+      - .env
+    volumes:
+      # Mount trained weights + runs dir from the host so the image itself
+      # stays small and doesn't need to be rebuilt after every training run.
+      - ./runs:/app/runs:ro
+    healthcheck:
+      test: [ "CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')" ]
+      interval: 30s
+      timeout: 5s
+      retries: 3

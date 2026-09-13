@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint-and-smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install minimal deps (skip heavy CV/train deps in CI)
+        run: |
+          pip install fastapi uvicorn pydantic python-dotenv python-multipart httpx pytest ruff
+
+      - name: Lint
+        run: ruff check api/ src/ data/ tests/ --line-length=120
+
+      - name: Unit tests (e2e tests auto-skip without trained weights present)
+        run: python -m pytest tests/test_api.py -v

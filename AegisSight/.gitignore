@@ -1,0 +1,13 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env
+data/raw/
+data/processed/
+data/supplementary_raw/
+runs/
+*.pt
+.pytest_cache/
+.ruff_cache/
+docs/eval_report.json

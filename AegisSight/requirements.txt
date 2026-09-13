@@ -1,0 +1,26 @@
+# --- Training / evaluation ---
+ultralytics>=8.3.0          # RT-DETR implementation (rtdetr-l / rtdetr-x)
+torch>=2.2.0
+torchvision>=0.17.0
+opencv-python-headless>=4.9.0
+Pillow>=10.2.0
+pycocotools>=2.0.7
+scikit-learn>=1.4.0
+pandas>=2.2.0
+matplotlib>=3.8.0
+seaborn>=0.13.0
+tqdm>=4.66.0
+pyyaml>=6.0.1
+roboflow>=1.1.9            # optional: only needed if pulling the dataset via Roboflow API
+
+# --- API / serving ---
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9
+pydantic>=2.7.0
+httpx>=0.27.0               # used for the hand-written LLM API call in api/llm_client.py
+python-dotenv>=1.0.1
+
+# --- Testing ---
+pytest>=8.2.0
+pytest-asyncio>=0.23.0
